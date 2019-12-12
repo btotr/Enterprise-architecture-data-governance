@@ -165,8 +165,15 @@ togaf:ArchitectureRequirementsRepository
 .
 togaf:ArchitectureVision
   a owl:Class ;
+  a sh:NodeShape ;
   rdfs:label "Architecture vision" ;
   rdfs:subClassOf togaf:ADMPhase ;
+  sh:property [
+      sh:path togaf:hasStep ;
+      sh:in (
+          togaf:EstablishTheArchitectureProject
+        ) ;
+    ] ;
   togaf:hasContentModelEntity "togaf:Stakeholders" ;
 .
 togaf:Artifact
@@ -308,6 +315,12 @@ All architecture artifacts, service agreements, contracts, and supporting inform
 The governance environment will have a number of administrative processes defined in order to effect a managed service and process environment. These processes will include user management, internal SLAs (defined in order to control its own processes), and management information reporting.""" ;
   rdfs:label "Environment management" ;
   rdfs:subClassOf togaf:Proces ;
+.
+togaf:EstablishTheArchitectureProject
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Establish the architecture project" ;
+  rdfs:subClassOf togaf:Step ;
 .
 togaf:EventEntity
   a owl:Class ;
@@ -524,6 +537,12 @@ togaf:SLA
   rdfs:label "SLA" ;
   rdfs:subClassOf togaf:Content ;
 .
+togaf:SelectReferenceModelsViewpointsAndTools
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Select reference models viewpoints and tools" ;
+  rdfs:subClassOf togaf:Step ;
+.
 togaf:ServiceEntity
   a owl:Class ;
   a sh:NodeShape ;
@@ -607,6 +626,12 @@ togaf:StandardInformationBase
   rdfs:label "Standard information base" ;
   rdfs:subClassOf togaf:ArchitectureRepository ;
 .
+togaf:Step
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Step" ;
+  rdfs:subClassOf owl:Thing ;
+.
 togaf:TechnologyArchitecture
   a owl:Class ;
   rdfs:comment "artifacts capture procured technology assets that are used to implement and realize information system solutions." ;
@@ -661,6 +686,12 @@ togaf:hasRelationship
   rdfs:label "has relationship" ;
   rdfs:range archimate:Relationship ;
 .
+togaf:hasStep
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:ADMPhase ;
+  rdfs:label "has step" ;
+  rdfs:range togaf:Step ;
+.
 togaf:keepInformed
   a togaf:StakeholderApproachValue ;
 .
@@ -672,6 +703,26 @@ togaf:keyPlayer
 .
 togaf:minimalEffort
   a togaf:StakeholderApproachValue ;
+.
+togaf:principleImplication
+  a owl:DatatypeProperty ;
+  rdfs:domain togaf:ArchitecturePrincipleEntity ;
+  rdfs:label "principle implication" ;
+  rdfs:range xsd:string ;
+.
+togaf:principleRationale
+  a owl:DatatypeProperty ;
+  rdfs:comment "Should highlight the business benefits of adhering to the principle, using business terminology. Point to the similarity of information and technology principles to the principles governing business operations. Also describe the relationship to other principles, and the intentions regarding a balanced interpretation. Describe situations where one principle would be given precedence or carry more weight than another for making a decision." ;
+  rdfs:domain togaf:ArchitecturePrincipleEntity ;
+  rdfs:label "principle rationale" ;
+  rdfs:range xsd:string ;
+.
+togaf:principleStatement
+  a owl:DatatypeProperty ;
+  rdfs:comment "Should succinctly and unambiguously communicate the fundamental rule. For the most part, the principles statements for managing information are similar from one organization to the next. It is vital that the principles statement is unambiguous." ;
+  rdfs:domain togaf:ArchitecturePrincipleEntity ;
+  rdfs:label "Principle statement" ;
+  rdfs:range xsd:string ;
 .
 togaf:principles
   a owl:ObjectProperty ;
