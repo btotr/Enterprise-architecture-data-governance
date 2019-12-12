@@ -1,0 +1,446 @@
+# baseURI: https://opengroup.org/ns/archimate
+
+@prefix : <https://opengroup.org/ns/archimate#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://opengroup.org/ns/archimate>
+  a owl:Ontology ;
+.
+:Access
+  a owl:Class ;
+  rdfs:label "Access" ;
+  rdfs:subClassOf :Dependency ;
+.
+:Active
+  a owl:Class ;
+  rdfs:label "Active" ;
+  rdfs:subClassOf :Structure ;
+.
+:Aggregatetion
+  a owl:Class ;
+  rdfs:label "Aggregatetion" ;
+  rdfs:subClassOf :Structural ;
+.
+:ApplicationCollaboration
+  a owl:Class ;
+  rdfs:label "Application collaboration" ;
+  rdfs:subClassOf :ApplicationComponent ;
+.
+:ApplicationComponent
+  a owl:Class ;
+  rdfs:label "Application component" ;
+  rdfs:subClassOf :InternalStructure ;
+.
+:ApplicationEvent
+  a owl:Class ;
+  rdfs:label "Application event" ;
+  rdfs:subClassOf :Event ;
+.
+:ApplicationFunction
+  a owl:Class ;
+  rdfs:label "Application function" ;
+  rdfs:subClassOf :Function ;
+.
+:ApplicationInteraction
+  a owl:Class ;
+  rdfs:label "Application interaction" ;
+  rdfs:subClassOf :Interaction ;
+.
+:ApplicationInterface
+  a owl:Class ;
+  rdfs:label "Application interface" ;
+  rdfs:subClassOf :ExternalStructure ;
+.
+:ApplicationProcess
+  a owl:Class ;
+  rdfs:label "Application process" ;
+  rdfs:subClassOf :Process ;
+.
+:ApplicationService
+  a owl:Class ;
+  rdfs:label "Application service" ;
+  rdfs:subClassOf :ExternalBehaviour ;
+.
+:Artifact
+  a owl:Class ;
+  rdfs:label "Artifact" ;
+  rdfs:subClassOf :Passive ;
+.
+:Assessment
+  a owl:Class ;
+  rdfs:label "Assessmenet" ;
+  rdfs:subClassOf :Motivation ;
+.
+:Assignment
+  a owl:Class ;
+  rdfs:label "Assignmanet" ;
+  rdfs:subClassOf :Structural ;
+.
+:Association
+  a owl:Class ;
+  rdfs:label "Association" ;
+  rdfs:subClassOf :Other ;
+.
+:Behavior
+  a owl:Class ;
+  rdfs:label "Behavior" ;
+  rdfs:subClassOf :Element ;
+.
+:BusinessActor
+  a owl:Class ;
+  rdfs:label "Business actor" ;
+  rdfs:subClassOf :InternalStructure ;
+.
+:BusinessCollaboration
+  a owl:Class ;
+  rdfs:label "Business collaboration" ;
+  rdfs:subClassOf :BusinessRole ;
+.
+:BusinessEvent
+  a owl:Class ;
+  rdfs:label "Business event" ;
+  rdfs:subClassOf :Event ;
+.
+:BusinessFunction
+  a owl:Class ;
+  rdfs:label "Business function" ;
+  rdfs:subClassOf :Function ;
+.
+:BusinessInteraction
+  a owl:Class ;
+  rdfs:label "Business interaction" ;
+  rdfs:subClassOf :Interaction ;
+.
+:BusinessInterface
+  a owl:Class ;
+  rdfs:label "Busness interface" ;
+  rdfs:subClassOf :ExternalStructure ;
+.
+:BusinessObject
+  a owl:Class ;
+  rdfs:label "Business object" ;
+  rdfs:subClassOf :Passive ;
+.
+:BusinessProcess
+  a owl:Class ;
+  rdfs:label "Business process" ;
+  rdfs:subClassOf :Process ;
+.
+:BusinessRole
+  a owl:Class ;
+  rdfs:label "Business role" ;
+  rdfs:subClassOf :InternalStructure ;
+.
+:BusinessService
+  a owl:Class ;
+  rdfs:label "Business service" ;
+  rdfs:subClassOf :ExternalBehaviour ;
+.
+:Capability
+  a owl:Class ;
+  rdfs:label "Capability" ;
+  rdfs:subClassOf :Behavior ;
+.
+:Composite
+  a owl:Class ;
+  rdfs:label "Composite" ;
+  rdfs:subClassOf :Element ;
+.
+:Composition
+  a owl:Class ;
+  rdfs:label "Composition" ;
+  rdfs:subClassOf :Structural ;
+.
+:Concept
+  a owl:Class ;
+  rdfs:label "Concept" ;
+  rdfs:subClassOf owl:Thing ;
+.
+:Contract
+  a owl:Class ;
+  rdfs:label "Contract" ;
+  rdfs:subClassOf :Passive ;
+.
+:CourseOfAction
+  a owl:Class ;
+  rdfs:label "Course of Action" ;
+  rdfs:subClassOf :Behavior ;
+.
+:DataObject
+  a owl:Class ;
+  rdfs:label "Data object" ;
+  rdfs:subClassOf :Passive ;
+.
+:Deliverable
+  a owl:Class ;
+  rdfs:label "Deliverable" ;
+  rdfs:subClassOf :Passive ;
+.
+:Dependency
+  a owl:Class ;
+  rdfs:label "Dependency" ;
+  rdfs:subClassOf :Relationship ;
+.
+:Device
+  a owl:Class ;
+  rdfs:label "device" ;
+  rdfs:subClassOf :Node ;
+.
+:Driver
+  a owl:Class ;
+  rdfs:label "Driver" ;
+  rdfs:subClassOf :Motivation ;
+.
+:Dynamic
+  a owl:Class ;
+  rdfs:label "Dynamic" ;
+  rdfs:subClassOf :Relationship ;
+.
+:Element
+  a owl:Class ;
+  rdfs:label "Element" ;
+  rdfs:subClassOf :Concept ;
+.
+:Event
+  a owl:Class ;
+  rdfs:comment "Represents a state change" ;
+  rdfs:label "Event" ;
+  rdfs:subClassOf :Behavior ;
+.
+:ExternalBehaviour
+  a owl:Class ;
+  rdfs:comment "Represents an explicitly defined exposed behavior." ;
+  rdfs:label "External behaviour" ;
+  rdfs:subClassOf :Behavior ;
+.
+:ExternalStructure
+  a owl:Class ;
+  rdfs:comment "Represents a point of access where one or more services are exposed to the environment." ;
+  rdfs:label "External" ;
+  rdfs:subClassOf :Active ;
+.
+:Flow
+  a owl:Class ;
+  rdfs:label "Flow" ;
+  rdfs:subClassOf :Dynamic ;
+.
+:Function
+  a owl:Class ;
+  rdfs:comment "Represents a collection of behavior based on specific criteria, such as required resources, competencies, or location." ;
+  rdfs:label "Function" ;
+  rdfs:subClassOf :InternalBehavior ;
+.
+:Gap
+  a owl:Class ;
+  rdfs:label "Gap" ;
+  rdfs:subClassOf :Passive ;
+.
+:Goal
+  a owl:Class ;
+  rdfs:label "Goal" ;
+  rdfs:subClassOf :Motivation ;
+.
+:Grouping
+  a owl:Class ;
+  rdfs:label "Grouping" ;
+  rdfs:subClassOf :Composite ;
+.
+:ImplementationEvent
+  a owl:Class ;
+  rdfs:label "Implementation event" ;
+  rdfs:subClassOf :Event ;
+.
+:Influence
+  a owl:Class ;
+  rdfs:label "Influence" ;
+  rdfs:subClassOf :Dependency ;
+.
+:Interaction
+  a owl:Class ;
+  rdfs:comment "Represents a unit of collective behavior that must be performed by two or more internal active structure elements, either assigned directly or aggregated in a collaboration." ;
+  rdfs:label "Interaction" ;
+  rdfs:subClassOf :InternalBehavior ;
+.
+:InternalBehavior
+  a owl:Class ;
+  rdfs:comment "Represents a unit of activity that can be performed by one or more active structure elements." ;
+  rdfs:label "Internal behavior" ;
+  rdfs:subClassOf :Behavior ;
+.
+:InternalStructure
+  a owl:Class ;
+  rdfs:comment "Represents an entity that is capable of performing behavior." ;
+  rdfs:label "Internal structure" ;
+  rdfs:subClassOf :Active ;
+.
+:Location
+  a owl:Class ;
+  rdfs:label "Location" ;
+  rdfs:subClassOf :Composite ;
+.
+:Meaning
+  a owl:Class ;
+  rdfs:label "Meaning" ;
+  rdfs:subClassOf :Motivation ;
+.
+:Motivation
+  a owl:Class ;
+  rdfs:label "Motivation" ;
+  rdfs:subClassOf :Element ;
+.
+:Node
+  a owl:Class ;
+  rdfs:label "Node" ;
+  rdfs:subClassOf :InternalStructure ;
+.
+:Other
+  a owl:Class ;
+  rdfs:label "Other" ;
+  rdfs:subClassOf :Relationship ;
+.
+:Outcome
+  a owl:Class ;
+  rdfs:label "Outcome" ;
+  rdfs:subClassOf :Motivation ;
+.
+:Passive
+  a owl:Class ;
+  rdfs:comment "Represents an element on which behavior is performed." ;
+  rdfs:label "Passive" ;
+  rdfs:subClassOf :Structure ;
+.
+:Plateau
+  a owl:Class ;
+  rdfs:label "Plateau" ;
+  rdfs:subClassOf :Composite ;
+.
+:Principle
+  a owl:Class ;
+  rdfs:label "Principle" ;
+  rdfs:subClassOf :Motivation ;
+.
+:Process
+  a owl:Class ;
+  rdfs:comment "Represents a sequence of behaviors that achieves a specific result." ;
+  rdfs:label "Process" ;
+  rdfs:subClassOf :InternalBehavior ;
+.
+:Product
+  a owl:Class ;
+  rdfs:label "Product" ;
+  rdfs:subClassOf :Composite ;
+.
+:Realization
+  a owl:Class ;
+  rdfs:label "Realization" ;
+  rdfs:subClassOf :Structural ;
+.
+:Relationship
+  a owl:Class ;
+  rdfs:label "Relationship" ;
+  rdfs:subClassOf :Concept ;
+.
+:Representation
+  a owl:Class ;
+  rdfs:label "representation" ;
+  rdfs:subClassOf :Passive ;
+.
+:Requirement
+  a owl:Class ;
+  rdfs:label "Requirement" ;
+  rdfs:subClassOf :Motivation ;
+.
+:Resource
+  a owl:Class ;
+  rdfs:label "Resource" ;
+  rdfs:subClassOf :Structure ;
+.
+:Serving
+  a owl:Class ;
+  rdfs:label "Serving" ;
+  rdfs:subClassOf :Dependency ;
+.
+:Specialization
+  a owl:Class ;
+  rdfs:label "Specialization" ;
+  rdfs:subClassOf :Other ;
+.
+:Stakeholder
+  a owl:Class ;
+  rdfs:label "Stakeholder" ;
+  rdfs:subClassOf :Active ;
+.
+:Structural
+  a owl:Class ;
+  rdfs:label "Structural" ;
+  rdfs:subClassOf :Relationship ;
+.
+:Structure
+  a owl:Class ;
+  rdfs:label "Structure" ;
+  rdfs:subClassOf :Element ;
+.
+:SystemSoftware
+  a owl:Class ;
+  rdfs:label "System software" ;
+  rdfs:subClassOf :Node ;
+.
+:TechnologyCollaboration
+  a owl:Class ;
+  rdfs:label "Technology collaboration" ;
+  rdfs:subClassOf :Node ;
+.
+:TechnologyEvent
+  a owl:Class ;
+  rdfs:label "Technology event" ;
+  rdfs:subClassOf :Event ;
+.
+:TechnologyFunction
+  a owl:Class ;
+  rdfs:label "Technology function" ;
+  rdfs:subClassOf :Function ;
+.
+:TechnologyInteraction
+  a owl:Class ;
+  rdfs:label "Technology interaction" ;
+  rdfs:subClassOf :Interaction ;
+.
+:TechnologyInterface
+  a owl:Class ;
+  rdfs:label "Technology interface" ;
+  rdfs:subClassOf :ExternalStructure ;
+.
+:TechnologyProcess
+  a owl:Class ;
+  rdfs:label "Technology process" ;
+  rdfs:subClassOf :Process ;
+.
+:TechnologyService
+  a owl:Class ;
+  rdfs:label "Technology service" ;
+  rdfs:subClassOf :ExternalBehaviour ;
+.
+:Triggering
+  a owl:Class ;
+  rdfs:label "Triggering" ;
+  rdfs:subClassOf :Dynamic ;
+.
+:WorkPackage
+  a owl:Class ;
+  rdfs:label "Work package" ;
+  rdfs:subClassOf :Behavior ;
+.
+:constraint
+  a owl:Class ;
+  rdfs:label "constraint" ;
+  rdfs:subClassOf :Requirement ;
+.
+:description
+  a owl:DatatypeProperty ;
+  rdfs:domain :Concept ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.

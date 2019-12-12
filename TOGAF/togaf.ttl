@@ -1,0 +1,708 @@
+# baseURI: https://opengroup.org/ns/togaf
+# imports: http://spinrdf.org/spin
+# imports: http://www.w3.org/ns/shacl#
+# imports: https://opengroup.org/ns/archimate
+# prefix: togaf
+
+@prefix archimate: <https://opengroup.org/ns/archimate#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix togaf: <https://opengroup.org/ns/togaf#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+owl:Thing
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "c1" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "c2" ;
+              ] ;
+            sp:predicate owl:equivalentClass ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "c2" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "c2" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "c2" ;
+              ] ;
+            sp:predicate owl:equivalentClass ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "c1" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+<https://opengroup.org/ns/togaf>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports sh: ;
+  owl:imports <https://opengroup.org/ns/archimate> ;
+.
+togaf:ADMPhase
+  a owl:Class ;
+  rdfs:label "ADM phases" ;
+  rdfs:subClassOf owl:Thing ;
+.
+togaf:ActorEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Actor and role entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:BusinessActor ;
+.
+togaf:ApplicationPortfolioCatalog
+  a owl:Class ;
+  spin:rule [
+      a sp:Construct ;
+    ] ;
+  rdfs:comment "The purpose of this catalog is to identify and maintain a list of all the applications in the enterprise. This list helps to define the horizontal scope of change initiatives that may impact particular kinds of applications. An agreed Application Portfolio allows a standard set of applications to be defined and governed." ;
+  rdfs:label "Application component" ;
+  rdfs:subClassOf togaf:Catalog ;
+.
+togaf:Architecture
+  a owl:Class ;
+  rdfs:label "Architecture" ;
+  rdfs:subClassOf togaf:Content ;
+.
+togaf:ArchitectureBuildingBlock
+  a owl:Class ;
+  rdfs:comment "Architecture Building Blocks (ABBs) relate to the Architecture Continuum and are defined or selected as a result of the application of the ADM." ;
+  rdfs:label "Architecture building block" ;
+  rdfs:subClassOf togaf:BuildingBlock ;
+.
+togaf:ArchitectureCapability
+  a owl:Class ;
+  rdfs:comment "defines the parameters, structures, and processes that support governance of the Architecture Repository" ;
+  rdfs:label "Architecture capability" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:ArchitectureGovernanceConcept
+  a owl:Class ;
+  rdfs:label "Architecture governance concept" ;
+  rdfs:subClassOf owl:Thing ;
+.
+togaf:ArchitectureLandscape
+  a owl:Class ;
+  rdfs:comment "presents an architectural representation of assets in use, or planned, by the enterprise at particular points in time" ;
+  rdfs:label "Architecture landscape" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:ArchitectureMetamodel
+  a owl:Class ;
+  rdfs:comment "describes the organizationally tailored application of an architecture framework, including a method for architecture development and a metamodel for architecture content" ;
+  rdfs:label "Architecture metamodel" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:ArchitecturePrincipleEntity
+  a owl:Class ;
+  rdfs:label "Architectural principles" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Principle ;
+.
+togaf:ArchitectureRepository
+  a owl:Class ;
+  rdfs:label "Enterprise repository" ;
+  rdfs:subClassOf owl:Thing ;
+.
+togaf:ArchitectureRequirementsRepository
+  a owl:Class ;
+  rdfs:comment "provides a view of all authorized architecture requirements which have been agreed with the Architecture Board" ;
+  rdfs:label "Requirements repository" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:ArchitectureVision
+  a owl:Class ;
+  rdfs:label "Architecture vision" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  togaf:hasContentModelEntity "togaf:Stakeholders" ;
+.
+togaf:Artifact
+  a owl:Class ;
+  rdfs:comment "An artifact is an architectural work product that describes an aspect of the architecture" ;
+  rdfs:label "Artifact" ;
+  rdfs:subClassOf owl:Thing ;
+.
+togaf:AuthorityStructure
+  a owl:Class ;
+  rdfs:label "Authority structure" ;
+  rdfs:subClassOf togaf:Content ;
+.
+togaf:BenefitsDiagram
+  a owl:Class ;
+  rdfs:label "Benefits diagram" ;
+  rdfs:subClassOf togaf:Diagram ;
+.
+togaf:BuildingBlock
+  a owl:Class ;
+  rdfs:comment "A building block represents a (potentially re-usable) component of enterprise capability that can be combined with other building blocks to deliver architectures and solutions" ;
+  rdfs:label "Building block" ;
+  rdfs:subClassOf owl:Thing ;
+.
+togaf:BuildingBlocks
+  a owl:Class ;
+  rdfs:label "Building block" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:BusinessArchitecture
+  a owl:Class ;
+  rdfs:comment "artifacts capture architectural models of business operation, looking specifically at factors that motivate the enterprise, how the enterprise is organizationally structured, and also what functional capabilities the enterprise has." ;
+  rdfs:label "Business architecture" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  togaf:hasContentModelEntity "togaf:Drivers" ;
+.
+togaf:BusinessServiceEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Business service entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:BusinessService ;
+.
+togaf:BusinessStrategyEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Business strategy entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:CapabilityEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Capability entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:Catalog
+  a owl:Class ;
+  rdfs:label "Catalog" ;
+  rdfs:subClassOf togaf:Artifact ;
+.
+togaf:Compliance
+  a owl:Class ;
+  rdfs:comment "Compliance assessments against Service-Level Agreements (SLAs), OLAs, standards, and regulatory requirements will be implemented on an ongoing basis to ensure stability, conformance, and performance monitoring. These assessments will be reviewed and either accepted or rejected depending on the criteria defined within the governance framework." ;
+  rdfs:label "Compliance" ;
+  rdfs:subClassOf togaf:Proces ;
+.
+togaf:ConstraintEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Constraint entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:constraint ;
+.
+togaf:Content
+  a owl:Class ;
+  rdfs:label "content" ;
+  rdfs:subClassOf togaf:ArchitectureGovernanceConcept ;
+.
+togaf:ContentMetaModelEntity
+  a owl:Class ;
+  rdfs:label "Content meta model entity" ;
+  rdfs:subClassOf owl:Thing ;
+.
+togaf:Contract
+  a owl:Class ;
+  rdfs:label "Contract" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:ControlEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A decision-making step with accompanying decision logic used to determine execution approach for a process or to ensure that a process complies with governance criteria. For example, a sign-off control on the purchase request processing process that checks whether the total value of the request is within the sign-off limits of the requester, or whether it needs escalating to higher authority." ;
+  rdfs:label "Control entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:CourseOfActionEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Course of action entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:CourseOfAction ;
+.
+togaf:DataEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Data entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:DataObject ;
+.
+togaf:DefinitionDocument
+  a owl:Class ;
+  rdfs:comment "The Architecture Definition Document is the deliverable container for the core architectural artifacts created during a project and for important related information. The Architecture Definition Document spans all architecture domains (business, data, application, and technology) and also examines all relevant states of the architecture (baseline, transition, and target)." ;
+  rdfs:label "Definition document" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:Deliverable
+  a owl:Class ;
+  rdfs:comment "A deliverable is a work product that is contractually specified and in turn formally reviewed, agreed, and signed off by the stakeholders" ;
+  rdfs:label "Deliverbles" ;
+  rdfs:subClassOf owl:Thing ;
+.
+togaf:Diagram
+  a owl:Class ;
+  rdfs:label "Diagram" ;
+  rdfs:subClassOf togaf:Artifact ;
+.
+togaf:DriverEntity
+  a owl:Class ;
+  rdfs:label "Drivers" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Driver ;
+.
+togaf:EnvironmentManagement
+  a owl:Class ;
+  rdfs:comment """This identifies all the services required to ensure that the repository-based environment underpinning the governance framework is effective and efficient. This includes the physical and logical repository management, access, communication, training, and accreditation of all users.
+
+All architecture artifacts, service agreements, contracts, and supporting information must come under governance through a formal process in order to register, validate, ratify, manage, and publish new or updated content. These processes will ensure the orderly integration with existing governance content such that all relevant parties, documents, contracts, and supporting information are managed and audited.
+
+The governance environment will have a number of administrative processes defined in order to effect a managed service and process environment. These processes will include user management, internal SLAs (defined in order to control its own processes), and management information reporting.""" ;
+  rdfs:label "Environment management" ;
+  rdfs:subClassOf togaf:Proces ;
+.
+togaf:EventEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Event entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Event ;
+.
+togaf:FunctionEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Function entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:BusinessFunction ;
+.
+togaf:GapEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Gap entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Gap ;
+.
+togaf:GoalEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Goal entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Goal ;
+.
+togaf:GovernanceLog
+  a owl:Class ;
+  rdfs:comment "provides a record of governance activity across the enterprise" ;
+  rdfs:label "Governance log" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:GuidelineEntity
+  a owl:Class ;
+  rdfs:label "Guidelines" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:ImplementationGovernance
+  a owl:Class ;
+  rdfs:label "Implementation governance" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  togaf:hasContentModelEntity "togaf:Guidelines" ;
+  togaf:hasContentModelEntity "togaf:Specifications" ;
+  togaf:hasContentModelEntity "togaf:Standards" ;
+.
+togaf:InformationSystemServiceEntity
+  a owl:Class ;
+  rdfs:label "Information system services" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:ApplicationService ;
+.
+togaf:InformationSystemsArchitecture
+  a owl:Class ;
+  rdfs:comment "artifacts capture architecture models of IT systems, looking at applications and data in line with the TOGAF ADM phases." ;
+  rdfs:label "Information systems architecture" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  togaf:hasContentModelEntity "togaf:InformationSystemServices" ;
+  togaf:hasContentModelEntity "togaf:PhysicalApplicationComponents" ;
+.
+togaf:LocationEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Location entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Location ;
+.
+togaf:LogicalApplicationComponentEntity
+  a owl:Class ;
+  rdfs:label "Logical application component" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:Matrix
+  a owl:Class ;
+  rdfs:label "Matrix" ;
+  rdfs:subClassOf togaf:Artifact ;
+.
+togaf:MeasureEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "An indicator or factor that can be tracked, usually on an ongoing basis, to determine success or alignment with objectives and goals." ;
+  rdfs:label "Measure entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:MigrationPlanning
+  a owl:Class ;
+  rdfs:label "Migration planning" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+.
+togaf:ObjectiveEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A time-bounded milestone for an organization used to demonstrate progress towards a goal; for example, \"Increase capacity utilization by 30% by the end of 2019 to support the planned increase in market share\"." ;
+  rdfs:label "Objective entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:OpportunitiesAndSolutions
+  a owl:Class ;
+  rdfs:label "Opportunities and solutions" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+.
+togaf:OrganizationUnitEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Organization unit entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:OrganizationalStandard
+  a owl:Class ;
+  rdfs:label "Organizational standard" ;
+  rdfs:subClassOf togaf:Content ;
+.
+togaf:PhysicalApplicationComponentEntity
+  a owl:Class ;
+  rdfs:label "Physical application components" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:ApplicationComponent ;
+.
+togaf:PhysicalTechnologyComponentEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Physical technology component entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Node ;
+.
+togaf:Preliminary
+  a owl:Class ;
+  rdfs:label "Preliminary" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+.
+togaf:Principles
+  a owl:Class ;
+  rdfs:label "Principle" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:PrinciplesCatalog
+  a owl:Class ;
+  rdfs:label "Principles catalog" ;
+  rdfs:subClassOf togaf:Catalog ;
+.
+togaf:Proces
+  a owl:Class ;
+  rdfs:comment "Governance processes are required to identify, manage, audit, and disseminate all information related to architecture management, contracts, and implementation. These governance processes will be used to ensure that all architecture artifacts and contracts, principles, and Operational-Level Agreements (OLAs) are monitored on an ongoing basis with clear auditability of all decisions made." ;
+  rdfs:label "Proces" ;
+  rdfs:subClassOf togaf:ArchitectureGovernanceConcept ;
+.
+togaf:ProcessEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Process entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:BusinessProcess ;
+.
+togaf:ProductEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Product entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Product ;
+.
+togaf:ProjectContextDiagram
+  a owl:Class ;
+  rdfs:label "Project context diagram" ;
+  rdfs:subClassOf togaf:Diagram ;
+.
+togaf:ReferenceLibrary
+  a owl:Class ;
+  rdfs:comment "provides guidelines, templates, patterns, and other forms of reference material that can be leveraged in order to accelerate the creation of new architectures for the enterprise" ;
+  rdfs:label "Reference library" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:Repository
+  a owl:Class ;
+  rdfs:label "Repository" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:Requirement
+  a owl:Class ;
+  rdfs:label "Requirement" ;
+  rdfs:subClassOf togaf:Content ;
+.
+togaf:RequirementEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Requirement entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:RequirementsCatalog
+  a owl:Class ;
+  rdfs:label "Requirements catalog" ;
+  rdfs:subClassOf togaf:Catalog ;
+.
+togaf:RequirementsSpecification
+  a owl:Class ;
+  rdfs:label "Requirements specification" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:Roadmap
+  a owl:Class ;
+  rdfs:label "Roadmap" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:RolEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Rol entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:BusinessRole ;
+.
+togaf:SLA
+  a owl:Class ;
+  rdfs:label "SLA" ;
+  rdfs:subClassOf togaf:Content ;
+.
+togaf:ServiceEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Service entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:BusinessService ;
+.
+togaf:ServiceQualityEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Servive quality entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:Solution
+  a owl:Class ;
+  rdfs:label "Solution" ;
+  rdfs:subClassOf togaf:Content ;
+.
+togaf:SolutionBuildingBlock
+  a owl:Class ;
+  rdfs:comment "Solution Building Blocks (SBBs) relate to the Solutions Continuum and may be either procured or developed." ;
+  rdfs:label "Solution building block" ;
+  rdfs:subClassOf togaf:BuildingBlock ;
+.
+togaf:SolutionConceptDiagram
+  a owl:Class ;
+  rdfs:label "Solution concept diagram" ;
+  rdfs:subClassOf togaf:Diagram ;
+.
+togaf:SolutionsLandscape
+  a owl:Class ;
+  rdfs:comment "presents an architectural representation of the Solution Building Blocks (SBBs) supporting the Architecture Landscape which have been planned or deployed by the enterprise" ;
+  rdfs:label "Solutions landscape" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:SpecificationEntity
+  a owl:Class ;
+  rdfs:label "Specifications" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:StakeholderApproachValue
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Class ;
+      owl:oneOf (
+          togaf:keepSatisfied
+          togaf:keyPlayer
+          togaf:minimalEffort
+          togaf:keepInformed
+        ) ;
+    ] ;
+.
+togaf:StakeholderEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Stackeholders" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:Stakeholder ;
+  sh:property [
+      sh:path togaf:stakeholderApproach ;
+      sh:in (
+          togaf:keepSatisfied
+          togaf:keyPlayer
+          togaf:minimalEffort
+          togaf:keepInformed
+        ) ;
+    ] ;
+.
+togaf:StakeholderMapMatrix
+  a owl:Class ;
+  rdfs:label "Stakeholder map matrix" ;
+  rdfs:subClassOf togaf:Matrix ;
+.
+togaf:StandardEntity
+  a owl:Class ;
+  rdfs:label "Standards" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:StandardInformationBase
+  a owl:Class ;
+  rdfs:label "Standard information base" ;
+  rdfs:subClassOf togaf:ArchitectureRepository ;
+.
+togaf:TechnologyArchitecture
+  a owl:Class ;
+  rdfs:comment "artifacts capture procured technology assets that are used to implement and realize information system solutions." ;
+  rdfs:label "Technology architecture" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+.
+togaf:TechnologyServiceEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Technology service entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:TechnologyService ;
+.
+togaf:ValueChainDiagram
+  a owl:Class ;
+  rdfs:label "Value chain diagram" ;
+  rdfs:subClassOf togaf:Diagram ;
+.
+togaf:ValueStreamEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A representation of an end-to-end collection of value-adding activities that create an overall result for a customer, stakeholder, or end-user." ;
+  rdfs:label "Value stream entity" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:WorkPackageEntity
+  a owl:Class ;
+  rdfs:label "Work packages" ;
+  rdfs:subClassOf togaf:ContentMetaModelEntity ;
+  owl:equivalentClass archimate:WorkPackage ;
+  togaf:hasContentModelEntity "togaf:ArchitecturePrinciples" ;
+.
+togaf:describes
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:Artifact ;
+  rdfs:label "descrbes" ;
+  rdfs:range togaf:BuildingBlock ;
+.
+togaf:hasContentModelEntity
+  a owl:ObjectProperty ;
+  rdfs:label "has content model entity" ;
+.
+togaf:hasElement
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:Catalog ;
+  rdfs:label "has element" ;
+  rdfs:range archimate:Element ;
+.
+togaf:hasRelationship
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:Matrix ;
+  rdfs:label "has relationship" ;
+  rdfs:range archimate:Relationship ;
+.
+togaf:keepInformed
+  a togaf:StakeholderApproachValue ;
+.
+togaf:keepSatisfied
+  a togaf:StakeholderApproachValue ;
+.
+togaf:keyPlayer
+  a togaf:StakeholderApproachValue ;
+.
+togaf:minimalEffort
+  a togaf:StakeholderApproachValue ;
+.
+togaf:principles
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:DefinitionDocument ;
+  rdfs:label "principles" ;
+  rdfs:range togaf:ArchitecturePrincipleEntity ;
+.
+togaf:scope
+  a owl:DatatypeProperty ;
+  rdfs:domain togaf:Deliverable ;
+  rdfs:label "scope" ;
+  rdfs:range xsd:string ;
+.
+togaf:stakeholderApproach
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:StakeholderEntity ;
+  rdfs:range togaf:StakeholderApproachValue ;
+.
+(
+  []
+).
+(
+  [
+    a sp:Union ;
+  ]
+).
+(
+  (
+    []
+  )
+  (
+    []
+  )
+).

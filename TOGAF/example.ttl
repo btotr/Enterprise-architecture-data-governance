@@ -1,0 +1,43 @@
+# baseURI: https://opengroup.org/ns/example
+# imports: https://opengroup.org/ns/rules
+# imports: https://opengroup.org/ns/togaf
+# prefix: example
+
+@prefix archimate: <https://opengroup.org/ns/archimate#> .
+@prefix example: <https://opengroup.org/ns/example#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix togaf: <https://opengroup.org/ns/togaf#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://opengroup.org/ns/example>
+  a owl:Ontology ;
+  owl:imports <https://opengroup.org/ns/rules> ;
+  owl:imports <https://opengroup.org/ns/togaf> ;
+.
+example:CEO
+  a togaf:StakeholderEntity ;
+  rdfs:label "CEO" ;
+  togaf:stakeholderApproach togaf:keyPlayer ;
+.
+example:bar
+  a archimate:ApplicationComponent ;
+  rdfs:label "Example component bar" ;
+.
+example:exampledriver
+  a archimate:Driver ;
+  rdfs:label "exampledriver" ;
+.
+example:foo
+  a archimate:ApplicationComponent ;
+  rdfs:label "foo" ;
+.
+example:necessary
+  a archimate:Principle ;
+  rdfs:label "necessary" ;
+  archimate:description "consumer arn't bothered with unnecesary questions" ;
+  archimate:name "BP07" ;
+.
