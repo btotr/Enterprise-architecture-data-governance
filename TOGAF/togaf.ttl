@@ -91,6 +91,40 @@ owl:Thing
   owl:imports sh: ;
   owl:imports <https://opengroup.org/ns/archimate> ;
 .
+togaf:A-ArchitectureVision
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Architecture vision" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  sh:property [
+      sh:path togaf:hasStep ;
+      sh:in (
+          togaf:EstablishTheArchitectureProject
+          togaf:AssessReadinessForBusinessTransformation
+          togaf:ConfirmAndElaborateArchitecturePrinciplesIncludingBusinessPrinciples
+          togaf:ConfirmAndElaborateBusinessGoalsBusinessDriversAndConstraints
+          togaf:DefineScope
+          togaf:DefineTheTargetArchitectureValuePropositionsAndKPIs
+          togaf:DevelopArchitectureVision
+          togaf:DevelopStatementOfArchitectureWorkSecureApproval
+          togaf:EvaluateCapabilities
+          togaf:IdentifytheBusinessTransformationRisksAndMitigationActivities
+          togaf:IdentifyStakeholdersConcernsAndBusinessRequirements
+        ) ;
+    ] ;
+  togaf:hasContentModelEntity "togaf:Stakeholders" ;
+.
+togaf:ADMCycle
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Enterprise Architecture is a business capability; each cycle of the ADM should normally be handled as a project using the project management framework of the enterprise. The project is defined in step 1 of phase A, Architecture Vision." ;
+  rdfs:label "ADM cycle" ;
+  rdfs:subClassOf owl:Thing ;
+  sh:property [
+      sh:path togaf:hasPhase ;
+      sh:maxCount 7 ;
+    ] ;
+.
 togaf:ADMPhase
   a owl:Class ;
   rdfs:label "ADM phases" ;
@@ -166,15 +200,9 @@ togaf:ArchitectureRequirementsRepository
 togaf:ArchitectureVision
   a owl:Class ;
   a sh:NodeShape ;
+  rdfs:comment "The Architecture Vision is created early on in the ADM cycle. It provides a summary of the changes to the enterprise that will accrue from successful deployment of the Target Architecture. The purpose of the Architecture Vision is to provide key stakeholders with a formally agreed outcome. Early agreement on the outcome enables the architects to focus on the detail necessary to validate feasibility. Providing an Architecture Vision also supports stakeholder communication by providing a summary version of the full Architecture Definition." ;
   rdfs:label "Architecture vision" ;
-  rdfs:subClassOf togaf:ADMPhase ;
-  sh:property [
-      sh:path togaf:hasStep ;
-      sh:in (
-          togaf:EstablishTheArchitectureProject
-        ) ;
-    ] ;
-  togaf:hasContentModelEntity "togaf:Stakeholders" ;
+  rdfs:subClassOf togaf:Deliverable ;
 .
 togaf:Artifact
   a owl:Class ;
@@ -182,10 +210,24 @@ togaf:Artifact
   rdfs:label "Artifact" ;
   rdfs:subClassOf owl:Thing ;
 .
+togaf:AssessReadinessForBusinessTransformation
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A Business Transformation Readiness Assessment can be used to evaluate and quantify the organization's readiness to undergo a change. This assessment is based upon the determination and analysis/rating of a series of readiness factors" ;
+  rdfs:label "Assess readiness for business transformation" ;
+  rdfs:subClassOf togaf:Step ;
+.
 togaf:AuthorityStructure
   a owl:Class ;
   rdfs:label "Authority structure" ;
   rdfs:subClassOf togaf:Content ;
+.
+togaf:B-BusinessArchitecture
+  a owl:Class ;
+  rdfs:comment "artifacts capture architectural models of business operation, looking specifically at factors that motivate the enterprise, how the enterprise is organizationally structured, and also what functional capabilities the enterprise has." ;
+  rdfs:label "Business architecture" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  togaf:hasContentModelEntity "togaf:Drivers" ;
 .
 togaf:BenefitsDiagram
   a owl:Class ;
@@ -203,13 +245,6 @@ togaf:BuildingBlocks
   rdfs:label "Building block" ;
   rdfs:subClassOf togaf:Deliverable ;
 .
-togaf:BusinessArchitecture
-  a owl:Class ;
-  rdfs:comment "artifacts capture architectural models of business operation, looking specifically at factors that motivate the enterprise, how the enterprise is organizationally structured, and also what functional capabilities the enterprise has." ;
-  rdfs:label "Business architecture" ;
-  rdfs:subClassOf togaf:ADMPhase ;
-  togaf:hasContentModelEntity "togaf:Drivers" ;
-.
 togaf:BusinessServiceEntity
   a owl:Class ;
   a sh:NodeShape ;
@@ -223,6 +258,21 @@ togaf:BusinessStrategyEntity
   rdfs:label "Business strategy entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
 .
+togaf:C-InformationSystemsArchitecture
+  a owl:Class ;
+  rdfs:comment "artifacts capture architecture models of IT systems, looking at applications and data in line with the TOGAF ADM phases." ;
+  rdfs:label "Information systems architecture" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  togaf:hasContentModelEntity "togaf:InformationSystemServices" ;
+  togaf:hasContentModelEntity "togaf:PhysicalApplicationComponents" ;
+.
+togaf:CapabilityAssessment
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Before embarking upon a detailed Architecture Definition, it is valuable to understand the baseline and target capability level of the enterprise." ;
+  rdfs:label "Capability assessment" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
 togaf:CapabilityEntity
   a owl:Class ;
   a sh:NodeShape ;
@@ -234,11 +284,36 @@ togaf:Catalog
   rdfs:label "Catalog" ;
   rdfs:subClassOf togaf:Artifact ;
 .
+togaf:CommunicationsPlan
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Enterprise Architectures contain large volumes of complex and inter-dependent information. Effective communication of targeted information to the right stakeholders at the right time is a Critical Success Factor (CSF) for Enterprise Architecture. Development of a Communications Plan for architecture allows for this communication to be carried out within a planned and managed process." ;
+  rdfs:label "Communications plan" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
 togaf:Compliance
   a owl:Class ;
   rdfs:comment "Compliance assessments against Service-Level Agreements (SLAs), OLAs, standards, and regulatory requirements will be implemented on an ongoing basis to ensure stability, conformance, and performance monitoring. These assessments will be reviewed and either accepted or rejected depending on the criteria defined within the governance framework." ;
   rdfs:label "Compliance" ;
   rdfs:subClassOf togaf:Proces ;
+.
+togaf:ConfirmAndElaborateArchitecturePrinciplesIncludingBusinessPrinciples
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Review the principles under which the architecture is to be developed. Architecture Principles are normally based on the principles developed as part of the Preliminary Phase" ;
+  rdfs:label "Confirm and elaborate architecture principles including business principles" ;
+  rdfs:subClassOf togaf:Step ;
+.
+togaf:ConfirmAndElaborateBusinessGoalsBusinessDriversAndConstraints
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment """Identify the business goals and strategic drivers of the organization.
+
+If these have already been defined elsewhere within the enterprise, ensure that the existing definitions are current, and clarify any areas of ambiguity. Otherwise, go back to the originators of the Statement of Architecture Work and work with them to define these essential items and secure their endorsement by corporate management.
+
+Define the constraints that must be dealt with, including enterprise-wide constraints and project-specific constraints (time, schedule, resources, etc.). The enterprise-wide constraints may be informed by the business and Architecture Principles developed in the Preliminary Phase or clarified as part of Phase A.""" ;
+  rdfs:label "Confirm and elaborate business goals business drivers and constraints" ;
+  rdfs:subClassOf togaf:Step ;
 .
 togaf:ConstraintEntity
   a owl:Class ;
@@ -276,12 +351,35 @@ togaf:CourseOfActionEntity
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:CourseOfAction ;
 .
+togaf:D-TechnologyArchitecture
+  a owl:Class ;
+  rdfs:comment "artifacts capture procured technology assets that are used to implement and realize information system solutions." ;
+  rdfs:label "Technology architecture" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+.
 togaf:DataEntity
   a owl:Class ;
   a sh:NodeShape ;
   rdfs:label "Data entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:DataObject ;
+.
+togaf:DefineScope
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Define what is inside and what is outside the scope of the Baseline Architecture and Target Architecture efforts, understanding that the baseline and target need not be described at the same level of detail. In many cases, the baseline is described at a higher level of abstraction, so more time is available to specify the target in sufficient detail." ;
+  rdfs:label "Define scope" ;
+  rdfs:subClassOf togaf:Step ;
+.
+togaf:DefineTheTargetArchitectureValuePropositionsAndKPIs
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Define the target architecture value propositions and KPIs" ;
+  rdfs:subClassOf togaf:Step ;
+  sh:property [
+      sh:path togaf:hasOutput ;
+      sh:class togaf:StatementOfArchitectureWork ;
+    ] ;
 .
 togaf:DefinitionDocument
   a owl:Class ;
@@ -295,6 +393,36 @@ togaf:Deliverable
   rdfs:label "Deliverbles" ;
   rdfs:subClassOf owl:Thing ;
 .
+togaf:DevelopArchitectureVision
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment """An understanding of the required artifacts will enable the stakeholders to start to scope out their decision-making which will guide subsequent phases. These decisions need to be reflected in the stakeholder map.
+
+Policy development and strategic decisions need to be captured in this phase to enable the subsequent work to be quantified; for example, rationalization decisions and metrics, revenue generation, and targets which meet the business strategy. There are also other areas which need to be addressed; for example, Digital Transformation and IT strategy where decisions on the Architecture Vision will provide leadership and direction for the organization in subsequent phases.
+
+For the Architecture Vision it is recommended that first an overall architecture be decided upon showing how all of the various architecture domain deliverables will fit together (based upon the selected course of action).
+
+Based on the stakeholder concerns, business capability requirements, scope, constraints, and principles, create a high-level view of the Baseline and Target Architectures. The Architecture Vision typically covers the breadth of scope identified for the project, at a high level. Informal techniques are often employed. A common practice is to draw a simple solution concept diagram that illustrates concisely the major components of the solution and how the solution will result in benefit for the enterprise.
+
+Business scenarios are an appropriate and useful technique to discover and document business requirements, and to articulate an Architecture Vision that responds to those requirements. Business scenarios may also be used at more detailed levels of the architecture work (e.g., in Phase B).
+
+This step generates the first, very high-level definitions of the baseline and target environments, from a business, information systems, and technology perspectives .
+
+These initial versions of the architecture should be stored in the Architecture Repository, organized according to the standards and guidelines established in the architecture framework.""" ;
+  rdfs:label "Develop architecture vision" ;
+  rdfs:subClassOf togaf:Step ;
+  sh:property [
+      sh:path togaf:hasOutput ;
+      sh:in togaf:ArchitectureVision ;
+    ] ;
+.
+togaf:DevelopStatementOfArchitectureWorkSecureApproval
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Assess the work products that are required to be produced (and by when) against the set of business performance requirements" ;
+  rdfs:label "Develop statement of architecture work secure approval" ;
+  rdfs:subClassOf togaf:Step ;
+.
 togaf:Diagram
   a owl:Class ;
   rdfs:label "Diagram" ;
@@ -305,6 +433,11 @@ togaf:DriverEntity
   rdfs:label "Drivers" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:Driver ;
+.
+togaf:E-OpportunitiesAndSolutions
+  a owl:Class ;
+  rdfs:label "Opportunities and solutions" ;
+  rdfs:subClassOf togaf:ADMPhase ;
 .
 togaf:EnvironmentManagement
   a owl:Class ;
@@ -319,8 +452,29 @@ The governance environment will have a number of administrative processes define
 togaf:EstablishTheArchitectureProject
   a owl:Class ;
   a sh:NodeShape ;
+  rdfs:comment """Enterprise Architecture is a business capability; each cycle of the ADM should normally be handled as a project using the project management framework of the enterprise. In some cases, architecture projects will be stand-alone. In other cases, architectural activities will be a subset of the activities within a larger project. In either case, architecture activity should be planned and managed using accepted practices for the enterprise.
+
+Conduct the necessary procedures to secure recognition of the project, the endorsement of corporate management, and the support and commitment of the necessary line management. Include references to other management frameworks in use within the enterprise, explaining how this project relates to those frameworks.""" ;
   rdfs:label "Establish the architecture project" ;
   rdfs:subClassOf togaf:Step ;
+.
+togaf:EvaluateCapabilities
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment """It is valuable to understand a collection of capabilities within the enterprise. One part refers to the capability of the enterprise to develop and consume the architecture. The second part refers to the baseline and target capability level of the enterprise. Gaps identified in the Architecture Capability require iteration between Architecture Vision and Preliminary Phase to ensure that the Architecture Capability is suitable to address the scope of the architecture project.
+
+A key step following from evaluation of business models, or artifacts that clarify priorities of a business strategy, is to identify the required business capabilities the enterprise must possess to act on the strategic priorities.
+The detailed assessment of business capability gaps belongs in Phase B as a core aspect of the Business Architecture, where the architect can help the enterprise understand gaps throughout the business, of many types, that need to be addressed in later phases of the architecture.
+
+In the Architecture Vision phase, however, the architect should consider the capability of the enterprise to develop the Enterprise Architecture itself, as required in the specific initiative or project underway. Gaps in the ability to progress through the ADM, whether deriving from skill shortages, information required, process weakness, or systems and tools, are a serious consideration in the vision of whether the architecture effort should continue.
+
+Gaps, or limitations, identified in the enterprise's capability to execute on change will inform the architect on the description of the Target Architecture and on the Implementation and Migration Plan created in Phase E and Phase F. This step seeks to understand the capabilities and desires of the enterprise at an appropriate level of abstraction. Consideration of the gap between the baseline and target capability of the enterprise is critical. Showing the baseline and target capabilities within the context of the overall enterprise can be supported by creating Value Chain diagrams that show the linkage of related capabilities. The results of the assessment are documented in a Capability Assessment.""" ;
+  rdfs:label "Evaluate capabilities" ;
+  rdfs:subClassOf togaf:Step ;
+  sh:property [
+      sh:path togaf:hasOutput ;
+      sh:in togaf:CapabilityAssessment ;
+    ] ;
 .
 togaf:EventEntity
   a owl:Class ;
@@ -329,12 +483,25 @@ togaf:EventEntity
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:Event ;
 .
+togaf:F-MigrationPlanning
+  a owl:Class ;
+  rdfs:label "Migration planning" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+.
 togaf:FunctionEntity
   a owl:Class ;
   a sh:NodeShape ;
   rdfs:label "Function entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:BusinessFunction ;
+.
+togaf:G-ImplementationGovernance
+  a owl:Class ;
+  rdfs:label "Implementation governance" ;
+  rdfs:subClassOf togaf:ADMPhase ;
+  togaf:hasContentModelEntity "togaf:Guidelines" ;
+  togaf:hasContentModelEntity "togaf:Specifications" ;
+  togaf:hasContentModelEntity "togaf:Standards" ;
 .
 togaf:GapEntity
   a owl:Class ;
@@ -361,27 +528,38 @@ togaf:GuidelineEntity
   rdfs:label "Guidelines" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
 .
-togaf:ImplementationGovernance
+togaf:IdentifyStakeholdersConcernsAndBusinessRequirements
   a owl:Class ;
-  rdfs:label "Implementation governance" ;
-  rdfs:subClassOf togaf:ADMPhase ;
-  togaf:hasContentModelEntity "togaf:Guidelines" ;
-  togaf:hasContentModelEntity "togaf:Specifications" ;
-  togaf:hasContentModelEntity "togaf:Standards" ;
+  a sh:NodeShape ;
+  rdfs:comment """Identify the key stakeholders and their concerns/objectives, and define the key business requirements to be addressed in the architecture engagement. Stakeholder engagement at this stage is intended to accomplish three objectives:
+
+- To identify candidate vision components and requirements to be tested as the Architecture Vision is developed
+- To identify candidate scope boundaries for the engagement to limit the extent of architectural investigation required
+- To identify stakeholder concerns, issues, and cultural factors that will shape how the architecture is presented and communicated
+
+The major product resulting from this step is a stakeholder map for the engagement, showing which stakeholders are involved with the engagement, their level of involvement, and their key concerns. The stakeholder map is used to support various outputs of the Architecture Vision phase, and to identify:
+
+The concerns and viewpoints that are relevant to this project; this is captured in the Architecture Vision
+The stakeholders that are involved with the project and as a result form the starting point for a Communications Plan 
+The key roles and responsibilities within the project, which should be included within the Statement of Architecture Work
+Another key task will be to consider which architecture views and viewpoints need to be developed to satisfy the various stakeholder requirements. As described in Part III, 21. Stakeholder Management , understanding at this stage which stakeholders and which views need to be developed is important in setting the scope of the engagement.
+
+During the Architecture Vision phase, new requirements generated for future architecture work within the scope of the selected requirements need to be documented within the Architecture Requirements Specification, and new requirements which are beyond the scope of the selected requirements must be input to the Requirements Repository for management through the Requirements Management process.""" ;
+  rdfs:label "Identify stakeholders concerns and business requirements" ;
+  rdfs:subClassOf togaf:Step ;
+.
+togaf:IdentifytheBusinessTransformationRisksAndMitigationActivities
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Identify the risks associated with the Architecture Vision and assess the initial level of risk (e.g., catastrophic, critical, marginal, or negligible) and the potential frequency associated with it. Assign a mitigation strategy for each risk." ;
+  rdfs:label "Identifythe business transformation risks and Mitigation activities" ;
+  rdfs:subClassOf togaf:Step ;
 .
 togaf:InformationSystemServiceEntity
   a owl:Class ;
   rdfs:label "Information system services" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:ApplicationService ;
-.
-togaf:InformationSystemsArchitecture
-  a owl:Class ;
-  rdfs:comment "artifacts capture architecture models of IT systems, looking at applications and data in line with the TOGAF ADM phases." ;
-  rdfs:label "Information systems architecture" ;
-  rdfs:subClassOf togaf:ADMPhase ;
-  togaf:hasContentModelEntity "togaf:InformationSystemServices" ;
-  togaf:hasContentModelEntity "togaf:PhysicalApplicationComponents" ;
 .
 togaf:LocationEntity
   a owl:Class ;
@@ -407,22 +585,12 @@ togaf:MeasureEntity
   rdfs:label "Measure entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
 .
-togaf:MigrationPlanning
-  a owl:Class ;
-  rdfs:label "Migration planning" ;
-  rdfs:subClassOf togaf:ADMPhase ;
-.
 togaf:ObjectiveEntity
   a owl:Class ;
   a sh:NodeShape ;
   rdfs:comment "A time-bounded milestone for an organization used to demonstrate progress towards a goal; for example, \"Increase capacity utilization by 30% by the end of 2019 to support the planned increase in market share\"." ;
   rdfs:label "Objective entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
-.
-togaf:OpportunitiesAndSolutions
-  a owl:Class ;
-  rdfs:label "Opportunities and solutions" ;
-  rdfs:subClassOf togaf:ADMPhase ;
 .
 togaf:OrganizationUnitEntity
   a owl:Class ;
@@ -626,17 +794,38 @@ togaf:StandardInformationBase
   rdfs:label "Standard information base" ;
   rdfs:subClassOf togaf:ArchitectureRepository ;
 .
+togaf:StatementOfArchitectureWork
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment """The TOGAF framework provides an industry standard for architecture that may be used in a wide variety of organizations. However, before the TOGAF framework can be effectively used within an architecture project, tailoring at two levels is necessary.
+
+Firstly, it is necessary to tailor the TOGAF model for integration into the enterprise. This tailoring will include integration with management frameworks, customization of terminology, development of presentational styles, selection, configuration, and deployment of architecture tools, etc. The formality and detail of any frameworks adopted should also align with other contextual factors for the enterprise, such as culture, stakeholders, commercial models for Enterprise Architecture, and the existing level of Architecture Capability.
+
+Once the framework has been tailored to the enterprise, further tailoring is necessary in order to tailor the framework for the specific architecture project. Tailoring at this level will select appropriate deliverables and artifacts to meet project and stakeholder needs.""" ;
+  rdfs:label "Statement of architecture work" ;
+  rdfs:subClassOf togaf:Deliverable ;
+.
 togaf:Step
   a owl:Class ;
   a sh:NodeShape ;
   rdfs:label "Step" ;
   rdfs:subClassOf owl:Thing ;
+  sh:property [
+      sh:path togaf:done ;
+      sh:datatype xsd:boolean ;
+      sh:maxCount 1 ;
+    ] ;
 .
-togaf:TechnologyArchitecture
+togaf:TailoredArchitectureFramework
   a owl:Class ;
-  rdfs:comment "artifacts capture procured technology assets that are used to implement and realize information system solutions." ;
-  rdfs:label "Technology architecture" ;
-  rdfs:subClassOf togaf:ADMPhase ;
+  a sh:NodeShape ;
+  rdfs:comment """The TOGAF framework provides an industry standard for architecture that may be used in a wide variety of organizations. However, before the TOGAF framework can be effectively used within an architecture project, tailoring at two levels is necessary.
+
+Firstly, it is necessary to tailor the TOGAF model for integration into the enterprise. This tailoring will include integration with management frameworks, customization of terminology, development of presentational styles, selection, configuration, and deployment of architecture tools, etc. The formality and detail of any frameworks adopted should also align with other contextual factors for the enterprise, such as culture, stakeholders, commercial models for Enterprise Architecture, and the existing level of Architecture Capability.
+
+Once the framework has been tailored to the enterprise, further tailoring is necessary in order to tailor the framework for the specific architecture project. Tailoring at this level will select appropriate deliverables and artifacts to meet project and stakeholder needs.""" ;
+  rdfs:label "Tailored architecture framework" ;
+  rdfs:subClassOf togaf:Deliverable ;
 .
 togaf:TechnologyServiceEntity
   a owl:Class ;
@@ -664,11 +853,24 @@ togaf:WorkPackageEntity
   owl:equivalentClass archimate:WorkPackage ;
   togaf:hasContentModelEntity "togaf:ArchitecturePrinciples" ;
 .
+togaf:comment
+  a owl:DatatypeProperty ;
+  rdfs:domain togaf:Step ;
+  rdfs:label "comment" ;
+  rdfs:range xsd:string ;
+.
 togaf:describes
   a owl:ObjectProperty ;
   rdfs:domain togaf:Artifact ;
   rdfs:label "descrbes" ;
   rdfs:range togaf:BuildingBlock ;
+.
+togaf:done
+  a owl:DatatypeProperty ;
+  rdfs:comment "Set a step as ready." ;
+  rdfs:domain togaf:Step ;
+  rdfs:label "done" ;
+  rdfs:range xsd:boolean ;
 .
 togaf:hasContentModelEntity
   a owl:ObjectProperty ;
@@ -679,6 +881,18 @@ togaf:hasElement
   rdfs:domain togaf:Catalog ;
   rdfs:label "has element" ;
   rdfs:range archimate:Element ;
+.
+togaf:hasOutput
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:Step ;
+  rdfs:label "has output" ;
+  rdfs:range togaf:Deliverable ;
+.
+togaf:hasPhase
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:ADMCycle ;
+  rdfs:label "has phase" ;
+  rdfs:range togaf:ADMPhase ;
 .
 togaf:hasRelationship
   a owl:ObjectProperty ;
@@ -691,6 +905,54 @@ togaf:hasStep
   rdfs:domain togaf:ADMPhase ;
   rdfs:label "has step" ;
   rdfs:range togaf:Step ;
+.
+togaf:identifiedConcerns
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:IdentifyStakeholdersConcernsAndBusinessRequirements ;
+  rdfs:label "identified concerns" ;
+  rdfs:range togaf:StakeholderEntity ;
+  rdfs:subPropertyOf togaf:identifiedEntity ;
+.
+togaf:identifiedConstraints
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:ConfirmAndElaborateBusinessGoalsBusinessDriversAndConstraints ;
+  rdfs:label "identified constraints" ;
+  rdfs:range togaf:ConstraintEntity ;
+  rdfs:subPropertyOf togaf:identifiedEntity ;
+.
+togaf:identifiedDrivers
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:ConfirmAndElaborateBusinessGoalsBusinessDriversAndConstraints ;
+  rdfs:label "identified drivers" ;
+  rdfs:range togaf:DriverEntity ;
+  rdfs:subPropertyOf togaf:identifiedEntity ;
+.
+togaf:identifiedEntity
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:Step ;
+  rdfs:label "identified entity" ;
+  rdfs:range togaf:ContentMetaModelEntity ;
+.
+togaf:identifiedGoals
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:ConfirmAndElaborateBusinessGoalsBusinessDriversAndConstraints ;
+  rdfs:label "identified goals" ;
+  rdfs:range togaf:GoalEntity ;
+  rdfs:subPropertyOf togaf:identifiedEntity ;
+.
+togaf:identifiedRequirement
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:IdentifyStakeholdersConcernsAndBusinessRequirements ;
+  rdfs:label "identified requirement" ;
+  rdfs:range togaf:RequirementEntity ;
+  rdfs:subPropertyOf togaf:identifiedEntity ;
+.
+togaf:identifiedStakeholder
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:IdentifyStakeholdersConcernsAndBusinessRequirements ;
+  rdfs:label "identified stakeholders" ;
+  rdfs:range togaf:StakeholderEntity ;
+  rdfs:subPropertyOf togaf:identifiedEntity ;
 .
 togaf:keepInformed
   a togaf:StakeholderApproachValue ;
