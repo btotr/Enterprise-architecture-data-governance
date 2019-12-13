@@ -146,6 +146,33 @@ togaf:ApplicationPortfolioCatalog
   rdfs:label "Application component" ;
   rdfs:subClassOf togaf:Catalog ;
 .
+togaf:ApplicationStandard
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:StandardInformationBase ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Application standard" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
 togaf:Architecture
   a owl:Class ;
   rdfs:label "Architecture" ;
@@ -156,12 +183,40 @@ togaf:ArchitectureBuildingBlock
   rdfs:comment "Architecture Building Blocks (ABBs) relate to the Architecture Continuum and are defined or selected as a result of the application of the ADM." ;
   rdfs:label "Architecture building block" ;
   rdfs:subClassOf togaf:BuildingBlock ;
+  owl:equivalentClass togaf:LogicalApplicationComponentEntity ;
 .
 togaf:ArchitectureCapability
   a owl:Class ;
   rdfs:comment "defines the parameters, structures, and processes that support governance of the Architecture Repository" ;
   rdfs:label "Architecture capability" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
+.
+togaf:ArchitectureCharter
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ArchitectureCapability ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Architecture charter" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
 .
 togaf:ArchitectureGovernanceConcept
   a owl:Class ;
@@ -172,30 +227,46 @@ togaf:ArchitectureLandscape
   a owl:Class ;
   rdfs:comment "presents an architectural representation of assets in use, or planned, by the enterprise at particular points in time" ;
   rdfs:label "Architecture landscape" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
 .
 togaf:ArchitectureMetamodel
   a owl:Class ;
   rdfs:comment "describes the organizationally tailored application of an architecture framework, including a method for architecture development and a metamodel for architecture content" ;
   rdfs:label "Architecture metamodel" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
 .
 togaf:ArchitecturePrincipleEntity
   a owl:Class ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "catalog" ;
+              ] ;
+            sp:predicate togaf:partOfCatalog ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:PrinciplesCatalog ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "catalog" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
   rdfs:label "Architectural principles" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:Principle ;
-.
-togaf:ArchitectureRepository
-  a owl:Class ;
-  rdfs:label "Enterprise repository" ;
-  rdfs:subClassOf owl:Thing ;
 .
 togaf:ArchitectureRequirementsRepository
   a owl:Class ;
   rdfs:comment "provides a view of all authorized architecture requirements which have been agreed with the Architecture Board" ;
   rdfs:label "Requirements repository" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
 .
 togaf:ArchitectureVision
   a owl:Class ;
@@ -238,11 +309,6 @@ togaf:BuildingBlock
   a owl:Class ;
   rdfs:comment "A building block represents a (potentially re-usable) component of enterprise capability that can be combined with other building blocks to deliver architectures and solutions" ;
   rdfs:label "Building block" ;
-  rdfs:subClassOf owl:Thing ;
-.
-togaf:BuildingBlocks
-  a owl:Class ;
-  rdfs:label "Building block" ;
   rdfs:subClassOf togaf:Deliverable ;
 .
 togaf:BusinessServiceEntity
@@ -251,6 +317,33 @@ togaf:BusinessServiceEntity
   rdfs:label "Business service entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:BusinessService ;
+.
+togaf:BusinessStandard
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:StandardInformationBase ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Business standard" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
 .
 togaf:BusinessStrategyEntity
   a owl:Class ;
@@ -265,6 +358,54 @@ togaf:C-InformationSystemsArchitecture
   rdfs:subClassOf togaf:ADMPhase ;
   togaf:hasContentModelEntity "togaf:InformationSystemServices" ;
   togaf:hasContentModelEntity "togaf:PhysicalApplicationComponents" ;
+.
+togaf:CapabilityArchitecture
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Capability architecture" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+  owl:equivalentClass togaf:CapabilityAssessment ;
+  sh:property [
+      sh:path togaf:partOfRepository ;
+      sh:class togaf:ArchitectureLandscape ;
+    ] ;
+.
+togaf:CapabilityArchitectureRequirement
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ArchitectureRequirementsRepository ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Repository entity" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
+togaf:CapabilityAssesment
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Capability assesment" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+  sh:property [
+      sh:path togaf:partOfRepository ;
+      sh:class togaf:GovernanceLog ;
+    ] ;
 .
 togaf:CapabilityAssessment
   a owl:Class ;
@@ -283,6 +424,7 @@ togaf:Catalog
   a owl:Class ;
   rdfs:label "Catalog" ;
   rdfs:subClassOf togaf:Artifact ;
+  owl:equivalentClass archimate:Element ;
 .
 togaf:CommunicationsPlan
   a owl:Class ;
@@ -296,6 +438,23 @@ togaf:Compliance
   rdfs:comment "Compliance assessments against Service-Level Agreements (SLAs), OLAs, standards, and regulatory requirements will be implemented on an ongoing basis to ensure stability, conformance, and performance monitoring. These assessments will be reviewed and either accepted or rejected depending on the criteria defined within the governance framework." ;
   rdfs:label "Compliance" ;
   rdfs:subClassOf togaf:Proces ;
+.
+togaf:ComplianceAssesment
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Compliance assesment" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+  owl:equivalentClass togaf:ComplianceAssessment ;
+  sh:property [
+      sh:path togaf:partOfRepository ;
+      sh:class togaf:GovernanceLog ;
+    ] ;
+.
+togaf:ComplianceAssessment
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Compliance assessment" ;
+  rdfs:subClassOf togaf:Deliverable ;
 .
 togaf:ConfirmAndElaborateArchitecturePrinciplesIncludingBusinessPrinciples
   a owl:Class ;
@@ -364,6 +523,40 @@ togaf:DataEntity
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:DataObject ;
 .
+togaf:DataStandard
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:StandardInformationBase ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Data standard" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
+togaf:DecisionLog
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "a log of all architecturally significant decisions that have been made in the organization" ;
+  rdfs:label "Decision log" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
 togaf:DefineScope
   a owl:Class ;
   a sh:NodeShape ;
@@ -377,7 +570,7 @@ togaf:DefineTheTargetArchitectureValuePropositionsAndKPIs
   rdfs:label "Define the target architecture value propositions and KPIs" ;
   rdfs:subClassOf togaf:Step ;
   sh:property [
-      sh:path togaf:hasOutput ;
+      sh:path togaf:contributeToDeliverble ;
       sh:class togaf:StatementOfArchitectureWork ;
     ] ;
 .
@@ -390,7 +583,7 @@ togaf:DefinitionDocument
 togaf:Deliverable
   a owl:Class ;
   rdfs:comment "A deliverable is a work product that is contractually specified and in turn formally reviewed, agreed, and signed off by the stakeholders" ;
-  rdfs:label "Deliverbles" ;
+  rdfs:label "Deliverble" ;
   rdfs:subClassOf owl:Thing ;
 .
 togaf:DevelopArchitectureVision
@@ -412,7 +605,7 @@ These initial versions of the architecture should be stored in the Architecture 
   rdfs:label "Develop architecture vision" ;
   rdfs:subClassOf togaf:Step ;
   sh:property [
-      sh:path togaf:hasOutput ;
+      sh:path togaf:contributeToDeliverble ;
       sh:in togaf:ArchitectureVision ;
     ] ;
 .
@@ -427,6 +620,7 @@ togaf:Diagram
   a owl:Class ;
   rdfs:label "Diagram" ;
   rdfs:subClassOf togaf:Artifact ;
+  owl:equivalentClass archimate:Concept ;
 .
 togaf:DriverEntity
   a owl:Class ;
@@ -472,7 +666,7 @@ Gaps, or limitations, identified in the enterprise's capability to execute on ch
   rdfs:label "Evaluate capabilities" ;
   rdfs:subClassOf togaf:Step ;
   sh:property [
-      sh:path togaf:hasOutput ;
+      sh:path togaf:contributeToDeliverble ;
       sh:in togaf:CapabilityAssessment ;
     ] ;
 .
@@ -521,12 +715,22 @@ togaf:GovernanceLog
   a owl:Class ;
   rdfs:comment "provides a record of governance activity across the enterprise" ;
   rdfs:label "Governance log" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
+  sh:property [
+      sh:path togaf:partOfRepository ;
+      sh:class togaf:DecisionLog ;
+    ] ;
 .
 togaf:GuidelineEntity
   a owl:Class ;
   rdfs:label "Guidelines" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
+.
+togaf:H-ArchitectureChangeManagement
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "H-Implementing change management" ;
+  rdfs:subClassOf togaf:ADMPhase ;
 .
 togaf:IdentifyStakeholdersConcernsAndBusinessRequirements
   a owl:Class ;
@@ -577,6 +781,7 @@ togaf:Matrix
   a owl:Class ;
   rdfs:label "Matrix" ;
   rdfs:subClassOf togaf:Artifact ;
+  owl:equivalentClass archimate:Relationship ;
 .
 togaf:MeasureEntity
   a owl:Class ;
@@ -592,6 +797,33 @@ togaf:ObjectiveEntity
   rdfs:label "Objective entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
 .
+togaf:OrganizationStructure
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ArchitectureCapability ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Organization structure" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
 togaf:OrganizationUnitEntity
   a owl:Class ;
   a sh:NodeShape ;
@@ -605,6 +837,27 @@ togaf:OrganizationalStandard
 .
 togaf:PhysicalApplicationComponentEntity
   a owl:Class ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "catalog" ;
+              ] ;
+            sp:predicate togaf:partOfCatalog ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ApplicationPortfolioCatalog ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "catalog" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
   rdfs:label "Physical application components" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:ApplicationComponent ;
@@ -656,16 +909,49 @@ togaf:ProjectContextDiagram
   rdfs:label "Project context diagram" ;
   rdfs:subClassOf togaf:Diagram ;
 .
+togaf:Reference
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ReferenceLibrary ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Reference" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
 togaf:ReferenceLibrary
   a owl:Class ;
   rdfs:comment "provides guidelines, templates, patterns, and other forms of reference material that can be leveraged in order to accelerate the creation of new architectures for the enterprise" ;
   rdfs:label "Reference library" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
 .
 togaf:Repository
   a owl:Class ;
   rdfs:label "Repository" ;
   rdfs:subClassOf togaf:Deliverable ;
+.
+togaf:RepositoryEntity
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Repository entity" ;
+  rdfs:subClassOf owl:Thing ;
 .
 togaf:Requirement
   a owl:Class ;
@@ -675,6 +961,27 @@ togaf:Requirement
 togaf:RequirementEntity
   a owl:Class ;
   a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "catalog" ;
+              ] ;
+            sp:predicate togaf:partOfCatalog ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:RequirementsCatalog ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "catalog" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
   rdfs:label "Requirement entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
 .
@@ -705,6 +1012,39 @@ togaf:SLA
   rdfs:label "SLA" ;
   rdfs:subClassOf togaf:Content ;
 .
+togaf:SegmentArchitecture
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Segment architecture" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
+togaf:SegmentArchitectureRequirements
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ArchitectureRequirementsRepository ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Segment architecture requirements " ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
 togaf:SelectReferenceModelsViewpointsAndTools
   a owl:Class ;
   a sh:NodeShape ;
@@ -724,6 +1064,33 @@ togaf:ServiceQualityEntity
   rdfs:label "Servive quality entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
 .
+togaf:Skills
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ArchitectureCapability ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Skills" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
 togaf:Solution
   a owl:Class ;
   rdfs:label "Solution" ;
@@ -734,6 +1101,13 @@ togaf:SolutionBuildingBlock
   rdfs:comment "Solution Building Blocks (SBBs) relate to the Solutions Continuum and may be either procured or developed." ;
   rdfs:label "Solution building block" ;
   rdfs:subClassOf togaf:BuildingBlock ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:unionOf (
+          togaf:PhysicalApplicationComponentEntity
+          togaf:PhysicalTechnologyComponentEntity
+        ) ;
+    ] ;
 .
 togaf:SolutionConceptDiagram
   a owl:Class ;
@@ -744,7 +1118,7 @@ togaf:SolutionsLandscape
   a owl:Class ;
   rdfs:comment "presents an architectural representation of the Solution Building Blocks (SBBs) supporting the Architecture Landscape which have been planned or deployed by the enterprise" ;
   rdfs:label "Solutions landscape" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
 .
 togaf:SpecificationEntity
   a owl:Class ;
@@ -766,7 +1140,62 @@ togaf:StakeholderApproachValue
 togaf:StakeholderEntity
   a owl:Class ;
   a sh:NodeShape ;
-  rdfs:label "Stackeholders" ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "matrix" ;
+              ] ;
+            sp:predicate togaf:partOfMatrix ;
+            sp:subject [
+                sp:varName "rel" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:StakeholderMapMatrix ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "matrix" ;
+              ] ;
+          ]
+          [
+            sp:object togaf:StakeholderEntity ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "Stakeholder" ;
+              ] ;
+          ]
+          [
+            sp:object togaf:DriverEntity ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "driver" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "Stakeholder" ;
+              ] ;
+            sp:predicate archimate:from ;
+            sp:subject [
+                sp:varName "rel" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "driver" ;
+              ] ;
+            sp:predicate archimate:to ;
+            sp:subject [
+                sp:varName "rel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Stakeholders" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:Stakeholder ;
   sh:property [
@@ -781,6 +1210,11 @@ togaf:StakeholderEntity
 .
 togaf:StakeholderMapMatrix
   a owl:Class ;
+  rdfs:comment """The purpose of the Stakeholder Map matrix is to identify the stakeholders for the architecture engagement, their influence over the engagement, and their key questions, issues, or concerns that must be addressed by the architecture framework.
+
+Understanding stakeholders and their requirements allows an architect to focus effort in areas that meet the needs of stakeholders.
+
+Due to the potentially sensitive nature of stakeholder mapping information and the fact that the Architecture Vision phase is intended to be conducted using informal modeling techniques, no specific metamodel entities will be used to generate a stakeholder map.""" ;
   rdfs:label "Stakeholder map matrix" ;
   rdfs:subClassOf togaf:Matrix ;
 .
@@ -792,7 +1226,7 @@ togaf:StandardEntity
 togaf:StandardInformationBase
   a owl:Class ;
   rdfs:label "Standard information base" ;
-  rdfs:subClassOf togaf:ArchitectureRepository ;
+  rdfs:subClassOf togaf:Repository ;
 .
 togaf:StatementOfArchitectureWork
   a owl:Class ;
@@ -816,6 +1250,39 @@ togaf:Step
       sh:maxCount 1 ;
     ] ;
 .
+togaf:StrategicArchitecture
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Strategic architecture" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
+togaf:StrategicArchitectureRequirements
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:ArchitectureRequirementsRepository ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Strategic architecture requirements" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
+.
 togaf:TailoredArchitectureFramework
   a owl:Class ;
   a sh:NodeShape ;
@@ -833,6 +1300,33 @@ togaf:TechnologyServiceEntity
   rdfs:label "Technology service entity" ;
   rdfs:subClassOf togaf:ContentMetaModelEntity ;
   owl:equivalentClass archimate:TechnologyService ;
+.
+togaf:TechnologyStandard
+  a owl:Class ;
+  a sh:NodeShape ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "repo" ;
+              ] ;
+            sp:predicate togaf:partOfRepository ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object togaf:StandardInformationBase ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "repo" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Technology standard" ;
+  rdfs:subClassOf togaf:RepositoryEntity ;
 .
 togaf:ValueChainDiagram
   a owl:Class ;
@@ -859,6 +1353,12 @@ togaf:comment
   rdfs:label "comment" ;
   rdfs:range xsd:string ;
 .
+togaf:contributeToDeliverble
+  a owl:ObjectProperty ;
+  rdfs:domain togaf:Step ;
+  rdfs:label "Contribute to deliverble" ;
+  rdfs:range togaf:Deliverable ;
+.
 togaf:describes
   a owl:ObjectProperty ;
   rdfs:domain togaf:Artifact ;
@@ -882,12 +1382,6 @@ togaf:hasElement
   rdfs:label "has element" ;
   rdfs:range archimate:Element ;
 .
-togaf:hasOutput
-  a owl:ObjectProperty ;
-  rdfs:domain togaf:Step ;
-  rdfs:label "has output" ;
-  rdfs:range togaf:Deliverable ;
-.
 togaf:hasPhase
   a owl:ObjectProperty ;
   rdfs:domain togaf:ADMCycle ;
@@ -910,7 +1404,7 @@ togaf:identifiedConcerns
   a owl:ObjectProperty ;
   rdfs:domain togaf:IdentifyStakeholdersConcernsAndBusinessRequirements ;
   rdfs:label "identified concerns" ;
-  rdfs:range togaf:StakeholderEntity ;
+  rdfs:range togaf:DriverEntity ;
   rdfs:subPropertyOf togaf:identifiedEntity ;
 .
 togaf:identifiedConstraints
@@ -965,6 +1459,18 @@ togaf:keyPlayer
 .
 togaf:minimalEffort
   a togaf:StakeholderApproachValue ;
+.
+togaf:partOfCatalog
+  a owl:ObjectProperty ;
+  rdfs:label "part of catalog" ;
+.
+togaf:partOfMatrix
+  a owl:ObjectProperty ;
+  rdfs:label "part of matrix" ;
+.
+togaf:partOfRepository
+  a owl:ObjectProperty ;
+  rdfs:label "has repository entity" ;
 .
 togaf:principleImplication
   a owl:DatatypeProperty ;

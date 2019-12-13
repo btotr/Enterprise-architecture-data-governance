@@ -18,10 +18,45 @@
   owl:imports <https://opengroup.org/ns/rules> ;
   owl:imports <https://opengroup.org/ns/togaf> ;
 .
+example:ApplicationPortfolioCatalog_1
+  a togaf:ApplicationPortfolioCatalog ;
+  a togaf:Reference ;
+  rdfs:label "Application portfolio catalog 1" ;
+.
+example:Association_1
+  a archimate:Association ;
+  rdfs:label "Association 1" ;
+  archimate:from example:CEO ;
+  archimate:to example:DriverEntity_1 ;
+.
 example:CEO
   a togaf:StakeholderEntity ;
   rdfs:label "CEO" ;
   togaf:stakeholderApproach togaf:keyPlayer ;
+.
+example:DriverEntity_1
+  a togaf:DriverEntity ;
+  rdfs:label "Driver entity 1" ;
+.
+example:ReferenceLibrary_1
+  a togaf:ReferenceLibrary ;
+  rdfs:label "Reference library 1" ;
+.
+example:SolutionBuildingBlock_1
+  a togaf:SolutionBuildingBlock ;
+  rdfs:label "Solution building block 1" ;
+.
+example:StakeholderMapMatrix_1
+  a togaf:StakeholderMapMatrix ;
+  rdfs:label "Stakeholder map matrix 1" ;
+.
+example:TechnologyStandard_1
+  a togaf:TechnologyStandard ;
+  rdfs:label "Technology standard 1" ;
+.
+example:a
+  a togaf:StandardInformationBase ;
+  rdfs:label "a" ;
 .
 example:bar
   a archimate:ApplicationComponent ;
@@ -40,4 +75,8 @@ example:necessary
   rdfs:label "necessary" ;
   archimate:description "consumer arn't bothered with unnecesary questions" ;
   archimate:name "BP07" ;
+.
+example:s1
+  a togaf:StrategicArchitectureRequirements ;
+  rdfs:label "s1" ;
 .

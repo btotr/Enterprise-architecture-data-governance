@@ -444,3 +444,21 @@
   rdfs:label "description" ;
   rdfs:range xsd:string ;
 .
+:from
+  a owl:ObjectProperty ;
+  rdfs:domain :Relationship ;
+  rdfs:label "from" ;
+  rdfs:range :Element ;
+.
+:stereotype
+  a owl:DatatypeProperty ;
+  rdfs:domain :Element ;
+  rdfs:label "stereotype" ;
+  rdfs:range xsd:string ;
+.
+:to
+  a owl:ObjectProperty ;
+  rdfs:domain :Relationship ;
+  rdfs:label "to" ;
+  rdfs:range :Element ;
+.
