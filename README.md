@@ -1,4 +1,4 @@
 # Enterprise Architecture Governance
-Model driven Enterprise Architecture governance using TOGAF, Archimate and RDF
+Model driven Enterprise Architecture data governance using TOGAF, Archimate and RDF
 
-WIP
+A simple model to relate EA data assets. The key idea is to treat EA output like diagrams or building blocks as data assets (as in DAMA) and relate them through a model using linked open data to create the architecture continuum. 
